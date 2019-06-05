@@ -3,6 +3,8 @@ using DocumentClient.Domain.Dto;
 using DocumentClientDemo.Domain.Contracts.Business;
 using DocumentClientDemo.Domain.Documents;
 using DocumentClientDemo.Domain.Dto;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DocumentClientDemo.Services.Business
@@ -37,6 +39,16 @@ namespace DocumentClientDemo.Services.Business
             };
 
             return userDto;
+        }
+
+        public async Task<List<UserDto>> GetUsersAsync(string name)
+        {
+            var usersFromDb = await _cosmosDBService.GetDocumentsAsync<User, UserDto>(q => q.Where(u => u.FirstName == name).Select(u => new UserDto()
+            {
+                FirstName =u.FirstName
+            }));
+
+            return usersFromDb;
         }
 
         public async Task<DocumentDBResultDto> CreateAsync(UserDto userDto)

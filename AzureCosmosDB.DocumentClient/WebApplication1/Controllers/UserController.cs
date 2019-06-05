@@ -2,6 +2,7 @@
 using DocumentClientDemo.Domain.Contracts.Business;
 using DocumentClientDemo.Domain.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DocumentClientDemo.WebApi.Controllers
@@ -22,6 +23,13 @@ namespace DocumentClientDemo.WebApi.Controllers
         public async Task<UserDto> Get(string id)
         {
             return await _userService.GetAsync(id);
+        }
+
+        [HttpGet("GetUsers")]
+        public async Task<List<UserDto>> GetUsers([FromQuery]string name)
+        {
+            var result = await _userService.GetUsersAsync(name);
+            return result;
         }
 
         // POST api/User

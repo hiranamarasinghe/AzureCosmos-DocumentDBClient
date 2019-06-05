@@ -11,6 +11,8 @@ namespace DocumentClientDemo.Domain.Contracts.Business
     {
         Task<UserDto> GetAsync(string id);
 
+        Task<List<UserDto>> GetUsersAsync(string name);
+
         Task<DocumentDBResultDto> CreateAsync(UserDto user);
 
         Task<DocumentDBResultDto> UpdateAsync(UserDto user);

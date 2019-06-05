@@ -70,7 +70,7 @@ namespace DocumentClientDemo.Services.Shared
             };
         }
 
-        public async Task<List<TResult>> GetDocuments<T, TResult>(string id, Func<IQueryable<T>, IQueryable<TResult>> query)
+        public async Task<List<TResult>> GetDocumentsAsync<T, TResult>(Func<IQueryable<T>, IQueryable<TResult>> query)
         {
             var feedOptions = new FeedOptions
             {
